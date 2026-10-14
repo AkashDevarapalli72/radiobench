@@ -1,0 +1,15 @@
+# One run = one config. Copy this file to define a new experiment.
+out_dir: results/default
+manifests:
+  - data/radio/manifest.jsonl
+  - data/librispeech.jsonl      # optional; remove if LibriSpeech not downloaded
+conditions: [clean, channel, snr20, snr10, snr5, snr0]
+limit: 60                       # utterances per source (CPU-friendly); remove for the full set
+fuzzy_post: true               # also report every system with fuzzy lexicon post-correction
+systems:
+  - {name: tiny,        size: tiny,  prompt: false}
+  - {name: base,        size: base,  prompt: false}
+  - {name: small,       size: small, prompt: false}
+  - {name: tiny-bias,   size: tiny,  prompt: true}
+  - {name: base-bias,   size: base,  prompt: true}
+  - {name: small-bias,  size: small, prompt: true}

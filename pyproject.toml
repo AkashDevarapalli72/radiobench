@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "radiobench"
+version = "0.1.0"
+description = "Radio-grade speech recognition benchmark: degradation simulator, synthetic public-safety test set, Whisper baselines, vocabulary biasing, and a metrics harness."
+requires-python = ">=3.10"
+dependencies = [
+  "numpy",
+  "scipy",
+  "soundfile",
+  "jiwer",
+  "rapidfuzz",
+  "pandas",
+  "matplotlib",
+  "pyyaml",
+  "tabulate",
+  "faster-whisper",
+  "imageio-ffmpeg",   # bundled ffmpeg binary when ffmpeg isn't on PATH
+]
+
+[project.optional-dependencies]
+tts = ["piper-tts"]
+dev = ["pytest"]
+demo = ["gradio"]
+finetune = ["torch", "transformers", "peft", "datasets", "accelerate"]
+diarization = ["pyannote.audio", "pyannote.metrics"]  # gated models: needs a user HF token
+
+[project.scripts]
+radiobench = "radiobench.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

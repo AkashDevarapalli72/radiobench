@@ -1,0 +1,8 @@
+out_dir: results/smoke
+manifests: [data/radio/manifest.jsonl, data/librispeech.jsonl]
+conditions: [clean, channel, snr20, snr10, snr5, snr0]
+limit: 6
+fuzzy_post: true
+systems:
+  - {name: tiny, size: tiny, prompt: false}
+  - {name: tiny-bias, size: tiny, prompt: true}
